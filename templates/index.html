@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloud Chat (Python + Firestore)</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; padding: 0; height: 100vh; display:flex; }
+      #sidebar { width: 260px; background:#f6f6f6; padding:10px; border-right:1px solid #ddd; box-sizing:border-box; }
+      #main { flex:1; display:flex; flex-direction:column; }
+      #messages { flex:1; padding:10px; overflow:auto; background:#fff; }
+      #composer { display:flex; padding:10px; border-top:1px solid #ddd; background:#fafafa; }
+      #composer input[type="text"] { flex:1; padding:8px; margin-right:8px; }
+      .message { margin-bottom:10px; }
+      .meta { color:#666; font-size:12px; }
+      .username { font-weight:bold; margin-right:6px; }
+      .room { padding:6px; cursor:pointer; border-radius:4px; }
+      .room:hover { background:#eee; }
+      .room.active { background:#ddd; font-weight:bold; }
+      #rooms-list { margin-top:8px; }
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <h3>Cloud Chat</h3>
+      <div>
+        <label>Username</label><br/>
+        <input id="username" type="text" placeholder="Your name" />
+      </div>
+      <hr/>
+      <div>
+        <label>Create or join room</label><br/>
+        <input id="room-input" type="text" placeholder="room-name" />
+        <button id="join-btn">Join</button>
+      </div>
+      <h4>Available Rooms</h4>
+      <div id="rooms-list"></div>
+    </div>
+
+    <div id="main">
+      <div id="messages"></div>
+      <div id="composer">
+        <input id="message-input" type="text" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Socket.IO client is served at /socket.io/socket.io.js by Flask-SocketIO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/chat.js"></script>
+  </body>
+</html>
